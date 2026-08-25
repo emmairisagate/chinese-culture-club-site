@@ -301,7 +301,7 @@
       <div class="navside">
         <button class="iconbtn" id="hamburger" aria-label="菜单">☰</button>
         <button class="iconbtn" id="helpBtn" title="使用说明" aria-label="使用说明">?</button>
-        <button class="iconbtn" id="editToggle" title="编辑内容" aria-label="编辑内容">✎</button>
+        <button class="iconbtn" id="editToggle" title="编辑内容" aria-label="编辑内容" style="display:none;">✎</button>
         <button class="btn btn-primary btn-sm" data-nav="join">Join Now</button>
       </div>
     </div>
@@ -1100,6 +1100,11 @@
     content = draft || clone(PUBLISHED_CONTENT);
     renderAll();
     goto("home");
+    // local draft mode (the ✎ button) is hidden from regular visitors — the real editing
+    // path is the /admin CMS. append ?edit=1 to the URL to reveal it for local testing.
+    if(location.search.indexOf("edit=1") !== -1){
+      document.getElementById("editToggle").style.display = "";
+    }
     if(!localStorage.getItem("ccc_seen_help")){
       document.getElementById("helpModal").classList.add("open");
       localStorage.setItem("ccc_seen_help","1");
