@@ -1,7 +1,7 @@
 {
   "advisor": {
-    "name": "Mrs. Smith",
-    "dept": "World Language Department",
+    "name": "Mrs. Wang",
+    "dept": "Chinese Language Department",
     "note": "Our advisor supports student leadership while encouraging cultural understanding and global citizenship.",
     "email": "smith@school.edu"
   },
@@ -192,12 +192,6 @@
     }
   ],
   "officers": [
-    {
-      "name": "Emily Wang",
-      "role": "President 社长",
-      "quote": "I love sharing Chinese culture with everyone.",
-      "img": null
-    },
     {
       "name": "David Lee",
       "role": "Vice President 副社长",
