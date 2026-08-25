@@ -524,7 +524,9 @@
       <section class="block-tight band-panel">
         <div class="wrap" style="max-width:640px;">
           <h2 style="margin-bottom:var(--sp-2);">Sign Up</h2>
-          <div id="joinFormWrap"></div>
+          <div style="background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsZnq9Fo2qSJn8tE49REi5t6WAPZeIta5CIJiOW_-0iT_-Qg/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="display:block;">Loading…</iframe>
+          </div>
         </div>
       </section>
 
@@ -559,24 +561,6 @@
     </div>
   </footer>
 </div>
-
-<!-- Netlify only detects forms it finds in the raw HTML at deploy time — the real
-     Join form below is built by JS at runtime, so this hidden twin (same name +
-     field names) exists purely so Netlify registers the form and gives it an
-     endpoint to submit to. It's never shown; visitors only ever see the real one. -->
-<form name="join" data-netlify="true" netlify-honeypot="bot-field" hidden>
-  <input type="text" name="name" />
-  <select name="grade"><option>9</option><option>10</option><option>11</option><option>12</option></select>
-  <input type="email" name="email" />
-  <textarea name="why"></textarea>
-  <input type="checkbox" name="interests" value="Food" />
-  <input type="checkbox" name="interests" value="Language" />
-  <input type="checkbox" name="interests" value="Festivals" />
-  <input type="checkbox" name="interests" value="Travel" />
-  <input type="checkbox" name="interests" value="Art" />
-  <input type="checkbox" name="interests" value="Volunteering" />
-  <input name="bot-field" />
-</form>
 
 <div id="editbar">
   <span>本地草稿模式 — 点文字直接改，卡片右上角 × 删除，列表下方 + 添加（正式发布请用 /admin 后台）</span>
@@ -931,23 +915,6 @@
       '<div class="m"><div class="k">Room</div><div class="v" data-path="meeting.room">'+esc(m.room)+'</div></div>' +
       '<div class="m"><div class="k">President</div><div class="v" data-path="meeting.president">'+esc(m.president)+'</div></div>' +
       '</div>';
-
-    document.getElementById("joinFormWrap").innerHTML =
-      '<form id="joinForm" name="join" data-netlify="true" netlify-honeypot="bot-field">' +
-        '<input type="hidden" name="form-name" value="join">' +
-        '<p hidden><label>Leave this empty: <input name="bot-field"></label></p>' +
-        '<div class="form-grid">' +
-          '<div class="field"><label>First & Last Name</label><input name="name" required></div>' +
-          '<div class="field"><label>Grade</label><select name="grade" required><option value="">Select</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>' +
-          '<div class="field full"><label>School Email</label><input name="email" type="email" required></div>' +
-          '<div class="field full"><label>Why do you want to join?</label><textarea name="why" rows="3"></textarea></div>' +
-          '<div class="field full"><label>Interests</label><div class="checks">' +
-            ["Food","Language","Festivals","Travel","Art","Volunteering"].map(function(x){ return '<label><input type="checkbox" name="interests" value="'+x+'">'+x+'</label>'; }).join("") +
-          '</div></div>' +
-        '</div>' +
-        '<button class="btn btn-primary" style="margin-top:var(--sp-3);" type="submit">Submit</button>' +
-        '<p id="joinError" style="display:none;color:var(--red);font-size:.85rem;margin-top:10px;">提交失败，请检查网络后重试，或者直接发邮件给我们。</p>' +
-      '</form>';
   }
 
   function renderAll(){
@@ -1093,24 +1060,6 @@
       saveContent();
       renderAll();
     });
-  });
-
-  document.addEventListener("submit", function(e){
-    if(e.target.id === "joinForm"){
-      e.preventDefault();
-      var form = e.target;
-      var body = new URLSearchParams(new FormData(form)).toString();
-      fetch("/", { method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: body })
-        .then(function(res){
-          if(!res.ok) throw new Error("bad status");
-          document.getElementById("joinFormWrap").innerHTML =
-            '<div class="success-panel"><div class="big">🎉</div><h3 style="margin:8px 0 4px;">Thank you for joining!</h3><p style="color:var(--ink-soft);">We can\'t wait to meet you — keep an eye on your email.</p></div>';
-        })
-        .catch(function(){
-          var err = document.getElementById("joinError");
-          if(err) err.style.display = "block";
-        });
-    }
   });
 
   /* -------------------- init --------------------
