@@ -525,7 +525,7 @@
         <div class="wrap" style="max-width:640px;">
           <h2 style="margin-bottom:var(--sp-2);">Sign Up</h2>
           <div style="background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsZnq9Fo2qSJn8tE49REi5t6WAPZeIta5CIJiOW_-0iT_-Qg/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="display:block;">Loading…</iframe>
+            <iframe id="joinFrame" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" style="display:block;">Loading…</iframe>
           </div>
         </div>
       </section>
@@ -745,11 +745,18 @@
       return '<button data-nav="'+v.id+'">'+v.label+'</button>';
     }).join("");
   }
+  var JOIN_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdsZnq9Fo2qSJn8tE49REi5t6WAPZeIta5CIJiOW_-0iT_-Qg/viewform?embedded=true";
   function goto(view){
     document.querySelectorAll(".view").forEach(function(s){ s.classList.toggle("active", s.dataset.view===view); });
     document.querySelectorAll("#navtabs button").forEach(function(b){ b.classList.toggle("active", b.dataset.nav===view); });
     document.getElementById("navtabs").classList.remove("mobile-open");
     window.scrollTo({top:0, behavior:"instant" in window ? "instant":"auto"});
+    // reload the embedded Google Form every time someone lands on Join Us, so it never
+    // gets stuck showing a previous visitor's "response recorded" confirmation screen
+    if(view === "join"){
+      var f = document.getElementById("joinFrame");
+      if(f) f.src = JOIN_FORM_URL + "&r=" + Date.now();
+    }
   }
 
   /* -------------------- renderers -------------------- */
