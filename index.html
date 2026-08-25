@@ -934,6 +934,7 @@
 
     document.getElementById("joinFormWrap").innerHTML =
       '<form id="joinForm" name="join" data-netlify="true" netlify-honeypot="bot-field">' +
+        '<input type="hidden" name="form-name" value="join">' +
         '<p hidden><label>Leave this empty: <input name="bot-field"></label></p>' +
         '<div class="form-grid">' +
           '<div class="field"><label>First & Last Name</label><input name="name" required></div>' +
