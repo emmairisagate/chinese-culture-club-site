@@ -1,0 +1,71 @@
+{
+  "site": {
+    "shortName": "Chinese Culture Club",
+    "school": "[你的高中名字]",
+    "email": "chineseclub@school.edu",
+    "instagram": "@yourschool.ccc"
+  },
+  "hero": {
+    "title": "Chinese Culture Club",
+    "subtitle": "Discover China. Connect Cultures. Build Friendships.",
+    "desc": "Experience Chinese language, traditions, food and festivals — through fun events, not lectures. No Chinese required.",
+    "img": null
+  },
+  "welcome": {
+    "text": "We started this club because we wanted a space where curiosity about China — the food, the language, the festivals, the memes — was welcome, whether or not you speak a word of Mandarin. No experience required. Just bring your appetite and an open mind.",
+    "caption": "社团合影 · Club Photo",
+    "img": null
+  },
+  "mission": "Chinese Culture Club exists to introduce students to the richness of Chinese language, history, traditions, and modern life — through food, festivals, and friendships, not lectures.",
+  "meeting": { "time": "Every Thursday", "period": "Lunch", "room": "Room B203", "advisor": "Mrs. Smith", "president": "Emily Wang" },
+  "officers": [
+    {"name": "Emily Wang", "role": "President 社长", "quote": "I love sharing Chinese culture with everyone.", "img": null},
+    {"name": "David Lee", "role": "Vice President 副社长", "quote": "负责活动组织与统筹。", "img": null},
+    {"name": "Sarah Chen", "role": "Secretary 秘书", "quote": "负责会议记录与内部沟通。", "img": null},
+    {"name": "Kevin Zhao", "role": "Media Manager 宣传", "quote": "负责网站、Instagram 和照片。", "img": null}
+  ],
+  "advisor": { "name": "Mrs. Smith", "dept": "World Language Department", "note": "Our advisor supports student leadership while encouraging cultural understanding and global citizenship.", "email": "smith@school.edu" },
+  "faqs": [
+    {"q": "Do I need to speak Chinese?", "a": "No. Everyone is welcome, no matter your background."},
+    {"q": "How much does it cost?", "a": "It's completely free to join."},
+    {"q": "When do you meet?", "a": "Every Thursday during lunch in Room B203."},
+    {"q": "Can freshmen join?", "a": "Absolutely — all grades are welcome."}
+  ],
+  "events": [
+    {"emoji": "🥟", "title": "Dumpling Workshop", "date": "Sep 18", "time": "Lunch", "location": "Room B201", "blurb": "Learn how to make authentic Chinese dumplings from scratch."},
+    {"emoji": "🥮", "title": "Mid-Autumn Festival", "date": "Oct 2", "time": "3:30 PM", "location": "Cafeteria", "blurb": "Mooncakes, lanterns, and stories about the harvest moon."},
+    {"emoji": "🖌", "title": "Calligraphy Night", "date": "Nov 14", "time": "Lunch", "location": "Room B203", "blurb": "Try your hand at brush strokes and write your name in Chinese."}
+  ],
+  "pastEvents": [
+    {"title": "Chinese New Year Festival", "date": "Feb 2026", "recap": "180 students, lion dance, and way too many red envelopes.", "img": null},
+    {"title": "Hot Pot Night", "date": "Dec 2025", "recap": "Our biggest turnout yet — 90 bowls of hot pot, zero leftovers.", "img": null},
+    {"title": "Movie Night: Nezha", "date": "Nov 2025", "recap": "Popcorn, subtitles, and a very loud reaction to the ending.", "img": null},
+    {"title": "Volunteer Day", "date": "Oct 2025", "recap": "Members helped at a community mooncake donation drive.", "img": null}
+  ],
+  "culture": {
+    "festivals": [
+      {"emoji": "🏮", "name": "Chinese New Year", "note": "Red envelopes, fireworks, and a reunion dinner that never seems to end."},
+      {"emoji": "🥮", "name": "Mid-Autumn Festival", "note": "Family, mooncakes, and staring at the same moon as people across the world."},
+      {"emoji": "🐉", "name": "Dragon Boat Festival", "note": "Rice dumplings and dragon boat races to honor an ancient poet."}
+    ],
+    "food": [
+      {"emoji": "🍲", "name": "Hot Pot", "spice": 3, "note": "A bubbling pot everyone shares — DIY dinner and a social event in one."},
+      {"emoji": "🥟", "name": "Xiaolongbao", "spice": 0, "note": "Soup dumplings. Bite a small hole first, or regret it."},
+      {"emoji": "🧋", "name": "Bubble Tea", "spice": 0, "note": "Originated in Taiwan, now everywhere — yes, we have opinions on toppings."},
+      {"emoji": "🌶️", "name": "Mala Tang", "spice": 4, "note": "Pick your skewers, pick your spice level, proceed with caution."}
+    ],
+    "funFacts": [
+      {"q": "How many pandas live only in China?", "a": "Nearly all wild giant pandas — their only natural habitat is a handful of mountain ranges in China."},
+      {"q": "Why is red considered lucky?", "a": "Red is linked to fire and joy in Chinese tradition, and thought to scare off bad luck."},
+      {"q": "How long is China's high-speed rail network?", "a": "Over 40,000 km — the longest in the world, and still growing."}
+    ]
+  },
+  "gallery": [
+    {"caption": "Dumpling Workshop", "tone": "red", "img": null},
+    {"caption": "Calligraphy Practice", "tone": "gold", "img": null},
+    {"caption": "Mid-Autumn Festival", "tone": "blue", "img": null},
+    {"caption": "Lunar New Year", "tone": "red", "img": null},
+    {"caption": "Hot Pot Night", "tone": "gold", "img": null},
+    {"caption": "Club Photo", "tone": "blue", "img": null}
+  ]
+}

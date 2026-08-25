@@ -1,0 +1,131 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "site"
+    label: "网站内容"
+    files:
+      - file: "content.json"
+        label: "全部内容"
+        name: "content"
+        fields:
+          - label: "社团信息"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "社团名称（英文）", name: "shortName", widget: "string" }
+              - { label: "学校名字", name: "school", widget: "string" }
+              - { label: "联系邮箱", name: "email", widget: "string" }
+              - { label: "Instagram", name: "instagram", widget: "string" }
+
+          - label: "首页大图 Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "标题", name: "title", widget: "string" }
+              - { label: "副标题", name: "subtitle", widget: "string" }
+              - { label: "介绍语", name: "desc", widget: "text" }
+              - { label: "背景照片", name: "img", widget: "image", required: false }
+
+          - label: "欢迎介绍 Welcome"
+            name: "welcome"
+            widget: "object"
+            fields:
+              - { label: "正文", name: "text", widget: "text" }
+              - { label: "照片说明", name: "caption", widget: "string" }
+              - { label: "照片", name: "img", widget: "image", required: false }
+
+          - { label: "社团使命 Mission", name: "mission", widget: "text" }
+
+          - label: "例会信息 Meeting"
+            name: "meeting"
+            widget: "object"
+            fields:
+              - { label: "时间", name: "time", widget: "string" }
+              - { label: "时段", name: "period", widget: "string" }
+              - { label: "地点", name: "room", widget: "string" }
+              - { label: "指导老师", name: "advisor", widget: "string" }
+              - { label: "社长", name: "president", widget: "string" }
+
+          - label: "干部 Officers"
+            name: "officers"
+            widget: "list"
+            fields:
+              - { label: "姓名", name: "name", widget: "string" }
+              - { label: "职位", name: "role", widget: "string" }
+              - { label: "一句话介绍", name: "quote", widget: "string" }
+              - { label: "照片", name: "img", widget: "image", required: false }
+
+          - label: "指导老师 Advisor"
+            name: "advisor"
+            widget: "object"
+            fields:
+              - { label: "姓名", name: "name", widget: "string" }
+              - { label: "部门", name: "dept", widget: "string" }
+              - { label: "介绍", name: "note", widget: "text" }
+              - { label: "邮箱", name: "email", widget: "string" }
+
+          - label: "常见问题 FAQ"
+            name: "faqs"
+            widget: "list"
+            fields:
+              - { label: "问题", name: "q", widget: "string" }
+              - { label: "回答", name: "a", widget: "text" }
+
+          - label: "近期活动 Events"
+            name: "events"
+            widget: "list"
+            fields:
+              - { label: "Emoji", name: "emoji", widget: "string" }
+              - { label: "活动名称", name: "title", widget: "string" }
+              - { label: "日期", name: "date", widget: "string" }
+              - { label: "时间", name: "time", widget: "string" }
+              - { label: "地点", name: "location", widget: "string" }
+              - { label: "简介", name: "blurb", widget: "text" }
+
+          - label: "往期活动 Past Events"
+            name: "pastEvents"
+            widget: "list"
+            fields:
+              - { label: "活动名称", name: "title", widget: "string" }
+              - { label: "日期", name: "date", widget: "string" }
+              - { label: "回顾", name: "recap", widget: "text" }
+              - { label: "照片", name: "img", widget: "image", required: false }
+
+          - label: "探索中国 Culture"
+            name: "culture"
+            widget: "object"
+            fields:
+              - label: "节日 Festivals"
+                name: "festivals"
+                widget: "list"
+                fields:
+                  - { label: "Emoji", name: "emoji", widget: "string" }
+                  - { label: "名称", name: "name", widget: "string" }
+                  - { label: "介绍", name: "note", widget: "text" }
+              - label: "美食 Food"
+                name: "food"
+                widget: "list"
+                fields:
+                  - { label: "Emoji", name: "emoji", widget: "string" }
+                  - { label: "名称", name: "name", widget: "string" }
+                  - { label: "辣度 (0-4)", name: "spice", widget: "number", value_type: "int", min: 0, max: 4 }
+                  - { label: "介绍", name: "note", widget: "text" }
+              - label: "冷知识 Fun Facts"
+                name: "funFacts"
+                widget: "list"
+                fields:
+                  - { label: "问题", name: "q", widget: "string" }
+                  - { label: "回答", name: "a", widget: "text" }
+
+          - label: "照片墙 Gallery"
+            name: "gallery"
+            widget: "list"
+            fields:
+              - { label: "说明文字", name: "caption", widget: "string" }
+              - { label: "占位色（没传照片时显示）", name: "tone", widget: "select", options: ["red", "gold", "blue"] }
+              - { label: "照片", name: "img", widget: "image", required: false }

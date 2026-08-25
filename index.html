@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chinese Culture Club</title>
+<style>
+  :root{
+    --red:#C62828;
+    --red-deep:#9E1F1F;
+    --red-soft:#F7E1E1;
+    --gold:#B8791C;
+    --gold-soft:#F5E6C6;
+    --paper:#FBF9F5;
+    --panel:#F3EEE6;
+    --panel-deep:#EAE1D3;
+    --ink:#2A2521;
+    --ink-soft:#6B6259;
+    --ink-faint:#9C9184;
+    --blue:#1D6FA5;
+    --blue-soft:#DEEAF3;
+    --green:#3F8F5B;
+    --line:rgba(42,37,33,.12);
+    --radius:12px;
+    --radius-sm:8px;
+    --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-5:48px; --sp-6:64px;
+    --shadow:0 2px 10px rgba(42,37,33,.08);
+    --shadow-md:0 10px 28px rgba(42,37,33,.14);
+    --font: "PingFang SC","Noto Sans SC","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{margin:0;text-wrap:balance;font-weight:800;letter-spacing:-.01em;}
+  p{margin:0;}
+  a{color:inherit;}
+  button{font-family:inherit;cursor:pointer;}
+  ul{margin:0;padding:0;list-style:none;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--gold-soft);}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  }
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 var(--sp-3);}
+  @media (max-width:640px){ .wrap{padding:0 var(--sp-2);} }
+
+  /* ---------- NAV ---------- */
+  #topnav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(251,249,245,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px;margin:0 auto;padding:0 var(--sp-3);
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;gap:var(--sp-3);
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;white-space:nowrap;}
+  .brand .mark{
+    width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--red),var(--red-deep));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex:none;
+  }
+  .navtabs{display:flex;gap:2px;align-items:center;overflow-x:auto;scrollbar-width:none;}
+  .navtabs::-webkit-scrollbar{display:none;}
+  .navtabs button{
+    border:none;background:none;padding:10px 14px;font-size:.92rem;font-weight:600;color:var(--ink-soft);
+    border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s;
+  }
+  .navtabs button:hover{color:var(--ink);}
+  .navtabs button.active{color:var(--red);border-bottom-color:var(--red);}
+  .navside{display:flex;align-items:center;gap:8px;flex:none;}
+  .iconbtn{
+    border:1px solid var(--line);background:#fff;border-radius:var(--radius-sm);
+    width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--ink-soft);
+  }
+  .iconbtn:hover{border-color:var(--ink-faint);color:var(--ink);}
+  .iconbtn.on{background:var(--gold-soft);border-color:var(--gold);color:var(--gold);}
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;border-radius:var(--radius-sm);
+    padding:10px 20px;font-weight:700;font-size:.92rem;border:1px solid transparent;transition:transform .12s, background .15s;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--red);color:#fff;}
+  .btn-primary:hover{background:var(--red-deep);}
+  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink-faint);}
+  .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.6);}
+  .btn-outline:hover{background:rgba(255,255,255,.12);}
+  .btn-sm{padding:7px 14px;font-size:.82rem;border-radius:7px;}
+
+  #hamburger{display:none;}
+  @media (max-width:760px){
+    .navtabs{display:none;}
+    #hamburger{display:flex;}
+    .navtabs.mobile-open{
+      display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;
+      background:#fff;border-bottom:1px solid var(--line);padding:8px;box-shadow:var(--shadow-md);
+    }
+    .navtabs.mobile-open button{text-align:left;border-bottom:none;padding:12px 10px;border-radius:8px;}
+    .navtabs.mobile-open button.active{background:var(--red-soft);}
+  }
+
+  /* ---------- VIEWS ---------- */
+  .view{display:none;}
+  .view.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);} to{opacity:1;transform:none;}}
+
+  section.block{padding:var(--sp-6) 0;}
+  .block-tight{padding:var(--sp-5) 0;}
+  .band-panel{background:var(--panel);}
+  .eyebrow{
+    display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--red);margin-bottom:var(--sp-1);
+  }
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--sp-2);margin-bottom:var(--sp-3);flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.5rem,3vw,1.9rem);}
+  .link-more{color:var(--red);font-weight:700;font-size:.9rem;white-space:nowrap;}
+  .link-more:hover{text-decoration:underline;}
+  .lede{color:var(--ink-soft);font-size:1.02rem;max-width:640px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:radial-gradient(120% 140% at 15% 0%, var(--red-deep), var(--red) 55%, #7d1717 100%);
+    color:#fff;padding:var(--sp-6) 0 calc(var(--sp-6) + 8px);position:relative;overflow:hidden;
+  }
+  .hero:after{
+    content:"";position:absolute;right:-8%;bottom:-30%;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle, rgba(249,168,37,.22), transparent 70%);
+  }
+  .hero-inner{position:relative;z-index:1;max-width:720px;}
+  .hero .eyebrow{color:var(--gold-soft);}
+  .hero h1{font-size:clamp(2.1rem,5.4vw,3.3rem);line-height:1.08;}
+  .brush{display:block;width:150px;height:14px;margin:14px 0 18px;}
+  .hero p.tag{font-size:1.12rem;opacity:.94;max-width:520px;margin-top:var(--sp-2);}
+  .hero-actions{display:flex;gap:12px;margin-top:var(--sp-4);flex-wrap:wrap;}
+
+  /* ---------- CARDS ---------- */
+  .grid{display:grid;gap:var(--sp-3);}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  @media (max-width:880px){ .grid-3,.grid-4{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;} }
+
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-3);
+    position:relative;box-shadow:var(--shadow);
+  }
+  .card h3{font-size:1.05rem;margin-bottom:6px;}
+
+  .event-card .emoji{font-size:1.6rem;}
+  .event-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--ink-soft);margin:8px 0;font-variant-numeric:tabular-nums;}
+  .event-meta span{display:inline-flex;align-items:center;gap:4px;}
+  .event-blurb{color:var(--ink-soft);font-size:.92rem;}
+
+  .officer-card{text-align:center;}
+  .avatar{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:800;font-size:1.1rem;background:linear-gradient(135deg,var(--gold),var(--red));
+  }
+  .officer-card .role{color:var(--red);font-size:.82rem;font-weight:700;margin-bottom:8px;}
+  .officer-card .quote{color:var(--ink-soft);font-size:.88rem;font-style:italic;}
+
+  .photo-tile{
+    aspect-ratio:4/3;border-radius:var(--radius);position:relative;overflow:hidden;
+    display:flex;align-items:flex-end;color:#fff;font-weight:700;font-size:.85rem;
+  }
+  .photo-tile span.cap{padding:10px 12px;background:linear-gradient(0deg, rgba(0,0,0,.55), transparent 70%);width:100%;}
+  .tone-red{background:linear-gradient(140deg,#D6544F,#8E1F1F);}
+  .tone-gold{background:linear-gradient(140deg,#E3A93F,#95651A);}
+  .tone-blue{background:linear-gradient(140deg,#4F8FB8,#1D4E6F);}
+  .photo-note{font-size:.82rem;color:var(--ink-faint);margin-top:var(--sp-2);}
+
+  .upload-btn{
+    position:absolute;left:8px;top:8px;width:28px;height:28px;border-radius:50%;
+    background:rgba(0,0,0,.55);color:#fff;display:none;align-items:center;justify-content:center;
+    font-size:.85rem;cursor:pointer;z-index:3;
+  }
+  body.editing .upload-btn{display:flex;}
+  .upload-btn:hover{background:rgba(0,0,0,.75);}
+  .avatar-wrap{position:relative;width:64px;height:64px;margin:0 auto 10px;}
+  .avatar-wrap .upload-btn{left:auto;right:-4px;top:-4px;width:22px;height:22px;font-size:.7rem;}
+  .hero.has-photo{background-size:cover;background-position:center;}
+  .hero.has-photo:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg, rgba(158,31,31,.85), rgba(126,23,23,.72));z-index:0;}
+  .hero .upload-btn{top:16px;right:16px;left:auto;}
+
+  .faq-item{border-bottom:1px solid var(--line);padding:var(--sp-2) 0;}
+  .faq-q{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;background:none;border:none;width:100%;text-align:left;padding:6px 0;color:var(--ink);font-size:.98rem;}
+  .faq-q .caret{color:var(--red);transition:transform .18s;flex:none;}
+  .faq-item.open .caret{transform:rotate(180deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .2s ease;color:var(--ink-soft);font-size:.92rem;}
+  .faq-item.open .faq-a{max-height:200px;padding-top:8px;}
+
+  .icon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--sp-2);}
+  @media (max-width:760px){ .icon-grid{grid-template-columns:repeat(3,1fr);} }
+  .icon-tile{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-2) 10px;text-align:center;
+    font-size:.85rem;font-weight:700;border:none;box-shadow:var(--shadow);
+  }
+  .icon-tile .e{font-size:1.5rem;display:block;margin-bottom:6px;}
+  .icon-tile:hover{box-shadow:var(--shadow-md);}
+
+  .strip{display:flex;gap:var(--sp-2);overflow-x:auto;padding-bottom:4px;}
+  .strip .photo-tile{flex:0 0 200px;}
+
+  .spice{display:inline-flex;gap:2px;}
+  .spice i{width:7px;height:7px;border-radius:50%;background:var(--line);}
+  .spice i.on{background:var(--red);}
+
+  .cta-band{
+    background:linear-gradient(120deg,var(--red-deep),var(--red));color:#fff;border-radius:var(--radius);
+    padding:var(--sp-4);display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;
+  }
+  .cta-band h3{font-size:1.3rem;}
+  .cta-band p{opacity:.9;font-size:.95rem;margin-top:4px;}
+
+  .meeting-strip{
+    display:flex;gap:var(--sp-4);flex-wrap:wrap;background:var(--panel);border-radius:var(--radius);padding:var(--sp-3) var(--sp-4);
+  }
+  .meeting-strip .m{min-width:110px;}
+  .meeting-strip .m .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);font-weight:700;}
+  .meeting-strip .m .v{font-weight:700;margin-top:2px;}
+
+  /* ---------- FORM ---------- */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2);}
+  @media (max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:.82rem;font-weight:700;color:var(--ink-soft);}
+  .field input, .field select, .field textarea{
+    border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;font-family:inherit;font-size:.95rem;background:#fff;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--blue);outline-offset:1px;}
+  .checks{display:flex;flex-wrap:wrap;gap:10px 16px;}
+  .checks label{display:flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500;}
+  .success-panel{background:var(--panel);border-radius:var(--radius);padding:var(--sp-4);text-align:center;}
+  .success-panel .big{font-size:2rem;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);background:var(--panel);padding:var(--sp-4) 0 var(--sp-3);}
+  .foot-grid{display:flex;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;}
+  .foot-grid h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);margin-bottom:10px;}
+  .foot-grid a{display:block;font-size:.9rem;color:var(--ink-soft);padding:3px 0;}
+  .foot-grid a:hover{color:var(--red);}
+  .copyright{margin-top:var(--sp-3);padding-top:var(--sp-2);border-top:1px solid var(--line);font-size:.8rem;color:var(--ink-faint);}
+
+  /* ---------- EDIT MODE ---------- */
+  .edit-only{display:none;}
+  body.editing .edit-only{display:inline-flex;}
+  body.editing [data-path]{outline:1px dashed var(--gold);outline-offset:2px;border-radius:3px;cursor:text;}
+  body.editing [data-path]:focus{outline:2px solid var(--red);background:var(--gold-soft);}
+  .del-btn{
+    position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:none;
+    background:var(--red);color:#fff;font-size:.8rem;line-height:1;display:none;align-items:center;justify-content:center;z-index:2;
+  }
+  body.editing .del-btn{display:flex;}
+  .add-btn{
+    border:1.5px dashed var(--ink-faint);background:transparent;color:var(--ink-soft);border-radius:var(--radius);
+    padding:var(--sp-2);font-weight:700;font-size:.88rem;width:100%;
+  }
+  .add-btn:hover{border-color:var(--red);color:var(--red);}
+  #editbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--ink);color:#fff;
+    display:none;align-items:center;justify-content:center;gap:10px;padding:12px 16px;flex-wrap:wrap;
+  }
+  body.editing #editbar{display:flex;}
+  #editbar span{font-size:.85rem;color:#D9D2C7;}
+  #editbar .btn{padding:8px 14px;font-size:.82rem;}
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(42,37,33,.5);display:none;align-items:center;justify-content:center;z-index:80;padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:#fff;border-radius:var(--radius);max-width:560px;width:100%;max-height:82vh;overflow:auto;
+    padding:var(--sp-4);box-shadow:var(--shadow-md);
+  }
+  .modal h3{margin-bottom:var(--sp-2);}
+  .modal ol{list-style:decimal;padding-left:1.2em;display:flex;flex-direction:column;gap:10px;color:var(--ink-soft);font-size:.92rem;}
+  .modal .close-row{display:flex;justify-content:flex-end;margin-top:var(--sp-3);}
+  .modal textarea{width:100%;height:220px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px;}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <nav id="topnav">
+    <div class="nav-inner">
+      <div class="brand"><span class="mark">🏮</span><span data-path="site.shortName">Chinese Culture Club</span></div>
+      <div class="navtabs" id="navtabs"></div>
+      <div class="navside">
+        <button class="iconbtn" id="hamburger" aria-label="菜单">☰</button>
+        <button class="iconbtn" id="helpBtn" title="使用说明" aria-label="使用说明">?</button>
+        <button class="iconbtn" id="editToggle" title="编辑内容" aria-label="编辑内容">✎</button>
+        <button class="btn btn-primary btn-sm" data-nav="join">Join Now</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <section class="view active" data-view="home">
+      <div class="hero" id="heroBlock">
+        <label class="upload-btn" title="上传首页大图">📁<input type="file" accept="image/*" data-upload="hero" style="display:none;"></label>
+        <div class="wrap hero-inner">
+          <span class="eyebrow" data-path="site.school">[你的高中名字]</span>
+          <h1 data-path="hero.title">Chinese Culture Club</h1>
+          <svg class="brush" viewBox="0 0 150 14"><path d="M2 8 C 40 -2, 60 16, 100 6 S 148 2, 148 2" stroke="#F4C874" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+          <p class="tag" data-path="hero.subtitle">Discover China. Connect Cultures. Build Friendships.</p>
+          <p class="tag" style="opacity:.85;font-size:.98rem;" data-path="hero.desc">Experience Chinese language, traditions, food and festivals — through fun events, not lectures. No Chinese required.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" style="background:#fff;color:var(--red-deep);" data-nav="join">Join Us</button>
+            <button class="btn btn-outline" data-nav="about">Learn More</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="block">
+        <div class="wrap grid grid-2" style="align-items:center;">
+          <div>
+            <span class="eyebrow">Welcome</span>
+            <h2 style="margin-bottom:12px;">Welcome to the Club</h2>
+            <p class="lede" data-path="welcome.text" style="max-width:100%;">We started this club because we wanted a space where curiosity about China — the food, the language, the festivals, the memes — was welcome, whether or not you speak a word of Mandarin. No experience required. Just bring your appetite and an open mind.</p>
+          </div>
+          <div id="welcomePhoto"></div>
+        </div>
+      </section>
+
+      <section class="block band-panel">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Upcoming Events</h2>
+            <a class="link-more" data-nav="events">See all events →</a>
+          </div>
+          <div class="grid grid-3" id="homeEvents"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap">
+          <div class="section-head"><h2>Explore Chinese Culture</h2></div>
+          <div class="icon-grid">
+            <button class="icon-tile" data-nav="culture"><span class="e">🏮</span>Festivals</button>
+            <button class="icon-tile" data-nav="culture"><span class="e">🍜</span>Food</button>
+            <button class="icon-tile" data-nav="culture"><span class="e">🎨</span>Arts</button>
+            <button class="icon-tile" data-nav="culture"><span class="e">🏯</span>Fun Facts</button>
+            <button class="icon-tile" data-nav="events"><span class="e">📅</span>Events</button>
+            <button class="icon-tile" data-nav="gallery"><span class="e">📷</span>Gallery</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="block band-panel">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Photo Gallery</h2>
+            <a class="link-more" data-nav="gallery">View all →</a>
+          </div>
+          <div class="strip" id="homeGallery"></div>
+        </div>
+      </section>
+
+      <section class="block-tight">
+        <div class="wrap">
+          <div class="cta-band">
+            <div>
+              <h3>Ready to join?</h3>
+              <p>Thursdays at lunch · Room B203 · Everyone welcome.</p>
+            </div>
+            <button class="btn" style="background:#fff;color:var(--red-deep);" data-nav="join">Join Now</button>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="view" data-view="about">
+      <section class="block-tight">
+        <div class="wrap">
+          <span class="eyebrow">About Us</span>
+          <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);">Building friendships through language & culture</h1>
+        </div>
+      </section>
+
+      <section class="block-tight band-panel">
+        <div class="wrap">
+          <h2 style="margin-bottom:10px;">Our Mission</h2>
+          <p class="lede" data-path="mission" style="max-width:100%;">Chinese Culture Club exists to introduce students to the richness of Chinese language, history, traditions, and modern life — through food, festivals, and friendships, not lectures.</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap">
+          <div class="section-head"><h2>Meet Our Officers</h2></div>
+          <div class="grid grid-4" id="officerGrid"></div>
+          <button class="add-btn edit-only" data-action="add-officers" style="margin-top:var(--sp-2);">+ 添加干部</button>
+        </div>
+      </section>
+
+      <section class="block band-panel">
+        <div class="wrap">
+          <div class="section-head"><h2>Faculty Advisor</h2></div>
+          <div class="card" id="advisorCard" style="max-width:520px;"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap" style="max-width:680px;">
+          <div class="section-head"><h2>FAQ</h2></div>
+          <div id="faqList"></div>
+          <button class="add-btn edit-only" data-action="add-faqs" style="margin-top:var(--sp-2);">+ 添加常见问题</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="view" data-view="events">
+      <section class="block-tight">
+        <div class="wrap">
+          <span class="eyebrow">Events</span>
+          <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);margin-bottom:var(--sp-3);">Join us to experience Chinese culture</h1>
+          <div class="meeting-strip" id="meetingStrip"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="wrap">
+          <div class="section-head"><h2>Upcoming Events</h2></div>
+          <div class="grid grid-3" id="eventsGrid"></div>
+          <button class="add-btn edit-only" data-action="add-events" style="margin-top:var(--sp-2);">+ 添加活动</button>
+        </div>
+      </section>
+
+      <section class="block band-panel">
+        <div class="wrap">
+          <div class="section-head"><h2>Past Events</h2></div>
+          <div class="grid grid-4" id="pastGrid"></div>
+          <button class="add-btn edit-only" data-action="add-pastEvents" style="margin-top:var(--sp-2);">+ 添加往期活动</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- CULTURE -->
+    <section class="view" data-view="culture">
+      <section class="block-tight">
+        <div class="wrap">
+          <span class="eyebrow">Explore China</span>
+          <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);">Ancient traditions. Modern life.</h1>
+        </div>
+      </section>
+
+      <section class="block-tight">
+        <div class="wrap">
+          <div class="section-head"><h2>🏮 Festivals</h2></div>
+          <div class="grid grid-3" id="festivalGrid"></div>
+          <button class="add-btn edit-only" data-action="add-festivals" style="margin-top:var(--sp-2);">+ 添加节日</button>
+        </div>
+      </section>
+
+      <section class="block-tight band-panel">
+        <div class="wrap">
+          <div class="section-head"><h2>🍜 Food to Try</h2></div>
+          <div class="grid grid-4" id="foodGrid"></div>
+          <button class="add-btn edit-only" data-action="add-food" style="margin-top:var(--sp-2);">+ 添加美食</button>
+        </div>
+      </section>
+
+      <section class="block-tight">
+        <div class="wrap">
+          <div class="section-head"><h2>🐼 Fun Facts</h2></div>
+          <div class="grid grid-3" id="factGrid"></div>
+          <button class="add-btn edit-only" data-action="add-funFacts" style="margin-top:var(--sp-2);">+ 添加冷知识</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="view" data-view="gallery">
+      <section class="block-tight">
+        <div class="wrap">
+          <span class="eyebrow">Gallery</span>
+          <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);">Our Memories</h1>
+          <p class="lede">Every event tells a story. Every student makes history.</p>
+          <p class="photo-note">照片目前是占位色块 — 点右上角 ✎ 进入编辑模式，色块左上角会出现 📁 按钮，可以上传你自己的照片试试效果。</p>
+        </div>
+      </section>
+      <section class="block-tight">
+        <div class="wrap">
+          <div class="grid grid-4" id="galleryGrid"></div>
+          <button class="add-btn edit-only" data-action="add-gallery" style="margin-top:var(--sp-2);">+ 添加照片占位</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- JOIN -->
+    <section class="view" data-view="join">
+      <div class="hero" style="padding:var(--sp-5) 0;">
+        <div class="wrap hero-inner">
+          <h1 style="font-size:clamp(1.9rem,4.6vw,2.6rem);">Join Chinese Culture Club</h1>
+          <p class="tag">Everyone is welcome. No Chinese required. Bring your curiosity.</p>
+        </div>
+      </div>
+
+      <section class="block-tight">
+        <div class="wrap grid grid-2">
+          <div>
+            <h2 style="margin-bottom:10px;">Why Join?</h2>
+            <ul id="whyJoinList" style="display:flex;flex-direction:column;gap:8px;color:var(--ink-soft);"></ul>
+          </div>
+          <div class="card" id="meetingCard"></div>
+        </div>
+      </section>
+
+      <section class="block-tight band-panel">
+        <div class="wrap" style="max-width:640px;">
+          <h2 style="margin-bottom:var(--sp-2);">Sign Up</h2>
+          <div id="joinFormWrap"></div>
+          <p class="photo-note">示例表单：这里只是效果演示，正式上线建议换成 Google 表单来真正收集报名信息。</p>
+        </div>
+      </section>
+
+      <section class="block-tight">
+        <div class="wrap">
+          <h2 style="margin-bottom:10px;">Contact</h2>
+          <p style="color:var(--ink-soft);">Email: <span data-path="site.email">chineseclub@school.edu</span> &nbsp;·&nbsp; Instagram: <span data-path="site.instagram">@yourschool.ccc</span></p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <h4>Quick Links</h4>
+          <a href="#" data-nav="home">Home</a>
+          <a href="#" data-nav="about">About</a>
+          <a href="#" data-nav="events">Events</a>
+          <a href="#" data-nav="culture">Explore China</a>
+          <a href="#" data-nav="gallery">Gallery</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="#" data-nav="join">Join Us</a>
+          <span style="display:block;font-size:.9rem;color:var(--ink-soft);padding:3px 0;" data-path="site.email">chineseclub@school.edu</span>
+          <span style="display:block;font-size:.9rem;color:var(--ink-soft);padding:3px 0;" data-path="site.instagram">@yourschool.ccc</span>
+        </div>
+      </div>
+      <div class="copyright">© 2026 Chinese Culture Club</div>
+    </div>
+  </footer>
+</div>
+
+<div id="editbar">
+  <span>本地草稿模式 — 点文字直接改，卡片右上角 × 删除，列表下方 + 添加（正式发布请用 /admin 后台）</span>
+  <button class="btn btn-sm" style="background:var(--gold);color:#fff;" id="saveBtn">保存</button>
+  <button class="btn btn-sm btn-ghost" id="exportBtn">导出内容</button>
+  <button class="btn btn-sm btn-ghost" id="importBtn">导入内容</button>
+  <button class="btn btn-sm btn-ghost" id="resetBtn">重置为默认</button>
+</div>
+
+<div class="modal-overlay" id="helpModal">
+  <div class="modal">
+    <h3>怎么用这个网站</h3>
+    <ol>
+      <li><b>正式发布内容：</b>去 <code>你的网址/admin</code> 用邀请的账号登录 Decap CMS 后台，改文字、传照片、点 Publish —— 这个改动会写进 <code>content.json</code>，对<b>所有访客</b>生效。这是网站真正的"后台"。</li>
+      <li><b>本地草稿模式（当前页面）：</b>右上角 <b>✎ 编辑内容</b> 是给你自己试效果、打草稿用的。点文字直接改，卡片右上角 <b>×</b> 删除，列表下方虚线按钮新增一条，照片色块左上角 <b>📁</b> 可以上传真实图片。改完点<b>保存</b>。</li>
+      <li><b>草稿只存在你自己的浏览器里：</b>跟 /admin 发布的正式内容是两回事——别人打开这个网址看不到你在草稿模式里加的东西，换个浏览器/清缓存也会丢。想恢复成正式发布的版本，点<b>重置为默认</b>。</li>
+      <li><b>备份草稿：</b>点<b>导出内容</b>复制一份 JSON（含照片）；<b>导入内容</b>可以贴回去恢复。如果还没设置好 /admin，也可以把导出的 JSON 手动贴进 <code>content.json</code> 文件里，达到临时发布的效果。</li>
+    </ol>
+    <div class="close-row"><button class="btn btn-primary btn-sm" id="closeHelp">知道了</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="ioModal">
+  <div class="modal">
+    <h3 id="ioTitle">导出内容</h3>
+    <textarea id="ioText"></textarea>
+    <div class="close-row">
+      <button class="btn btn-ghost btn-sm" id="ioCancel">取消</button>
+      <button class="btn btn-primary btn-sm" id="ioApply" style="margin-left:8px;">应用导入</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* =====================================================================
+     内容配置 —— 想永久修改默认文字/活动/照片，直接改下面这个对象就行。
+     以后接手的同学不需要动上面的 HTML/CSS，只改这一块即可。
+     ===================================================================== */
+  var DEFAULT_CONTENT = {
+    site: {
+      shortName: "Chinese Culture Club",
+      school: "[你的高中名字]",
+      email: "chineseclub@school.edu",
+      instagram: "@yourschool.ccc"
+    },
+    hero: {
+      title: "Chinese Culture Club",
+      subtitle: "Discover China. Connect Cultures. Build Friendships.",
+      desc: "Experience Chinese language, traditions, food and festivals — through fun events, not lectures. No Chinese required.",
+      img: null
+    },
+    welcome: {
+      text: "We started this club because we wanted a space where curiosity about China — the food, the language, the festivals, the memes — was welcome, whether or not you speak a word of Mandarin. No experience required. Just bring your appetite and an open mind.",
+      caption: "社团合影 · Club Photo",
+      img: null
+    },
+    mission: "Chinese Culture Club exists to introduce students to the richness of Chinese language, history, traditions, and modern life — through food, festivals, and friendships, not lectures.",
+    meeting: { time:"Every Thursday", period:"Lunch", room:"Room B203", advisor:"Mrs. Smith", president:"Emily Wang" },
+    officers: [
+      {name:"Emily Wang", role:"President 社长", quote:"I love sharing Chinese culture with everyone.", img:null},
+      {name:"David Lee", role:"Vice President 副社长", quote:"负责活动组织与统筹。", img:null},
+      {name:"Sarah Chen", role:"Secretary 秘书", quote:"负责会议记录与内部沟通。", img:null},
+      {name:"Kevin Zhao", role:"Media Manager 宣传", quote:"负责网站、Instagram 和照片。", img:null}
+    ],
+    advisor: { name:"Mrs. Smith", dept:"World Language Department", note:"Our advisor supports student leadership while encouraging cultural understanding and global citizenship.", email:"smith@school.edu" },
+    faqs: [
+      {q:"Do I need to speak Chinese?", a:"No. Everyone is welcome, no matter your background."},
+      {q:"How much does it cost?", a:"It's completely free to join."},
+      {q:"When do you meet?", a:"Every Thursday during lunch in Room B203."},
+      {q:"Can freshmen join?", a:"Absolutely — all grades are welcome."}
+    ],
+    events: [
+      {emoji:"🥟", title:"Dumpling Workshop", date:"Sep 18", time:"Lunch", location:"Room B201", blurb:"Learn how to make authentic Chinese dumplings from scratch."},
+      {emoji:"🥮", title:"Mid-Autumn Festival", date:"Oct 2", time:"3:30 PM", location:"Cafeteria", blurb:"Mooncakes, lanterns, and stories about the harvest moon."},
+      {emoji:"🖌", title:"Calligraphy Night", date:"Nov 14", time:"Lunch", location:"Room B203", blurb:"Try your hand at brush strokes and write your name in Chinese."}
+    ],
+    pastEvents: [
+      {title:"Chinese New Year Festival", date:"Feb 2026", recap:"180 students, lion dance, and way too many red envelopes.", img:null},
+      {title:"Hot Pot Night", date:"Dec 2025", recap:"Our biggest turnout yet — 90 bowls of hot pot, zero leftovers.", img:null},
+      {title:"Movie Night: Nezha", date:"Nov 2025", recap:"Popcorn, subtitles, and a very loud reaction to the ending.", img:null},
+      {title:"Volunteer Day", date:"Oct 2025", recap:"Members helped at a community mooncake donation drive.", img:null}
+    ],
+    culture: {
+      festivals: [
+        {emoji:"🏮", name:"Chinese New Year", note:"Red envelopes, fireworks, and a reunion dinner that never seems to end."},
+        {emoji:"🥮", name:"Mid-Autumn Festival", note:"Family, mooncakes, and staring at the same moon as people across the world."},
+        {emoji:"🐉", name:"Dragon Boat Festival", note:"Rice dumplings and dragon boat races to honor an ancient poet."}
+      ],
+      food: [
+        {emoji:"🍲", name:"Hot Pot", spice:3, note:"A bubbling pot everyone shares — DIY dinner and a social event in one."},
+        {emoji:"🥟", name:"Xiaolongbao", spice:0, note:"Soup dumplings. Bite a small hole first, or regret it."},
+        {emoji:"🧋", name:"Bubble Tea", spice:0, note:"Originated in Taiwan, now everywhere — yes, we have opinions on toppings."},
+        {emoji:"🌶️", name:"Mala Tang", spice:4, note:"Pick your skewers, pick your spice level, proceed with caution."}
+      ],
+      funFacts: [
+        {q:"How many pandas live only in China?", a:"Nearly all wild giant pandas — their only natural habitat is a handful of mountain ranges in China."},
+        {q:"Why is red considered lucky?", a:"Red is linked to fire and joy in Chinese tradition, and thought to scare off bad luck."},
+        {q:"How long is China's high-speed rail network?", a:"Over 40,000 km — the longest in the world, and still growing."}
+      ]
+    },
+    gallery: [
+      {caption:"Dumpling Workshop", tone:"red", img:null},
+      {caption:"Calligraphy Practice", tone:"gold", img:null},
+      {caption:"Mid-Autumn Festival", tone:"blue", img:null},
+      {caption:"Lunar New Year", tone:"red", img:null},
+      {caption:"Hot Pot Night", tone:"gold", img:null},
+      {caption:"Club Photo", tone:"blue", img:null}
+    ]
+  };
+
+  var STORAGE_KEY = "ccc_content_v1";
+  var PUBLISHED_CONTENT = null; // set by boot() once content.json is fetched (falls back to DEFAULT_CONTENT)
+  var content = clone(DEFAULT_CONTENT); // placeholder until boot() resolves
+
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function loadLocalDraft(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){}
+    return null;
+  }
+  function saveContent(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(content)); flashSave(); }
+  function flashSave(){
+    var b = document.getElementById("saveBtn");
+    if(!b) return;
+    var old = b.textContent; b.textContent = "已保存 ✓";
+    setTimeout(function(){ b.textContent = old; }, 900);
+  }
+
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+  function getPath(obj, path){
+    var parts = path.split(".");
+    var cur = obj;
+    for(var i=0;i<parts.length;i++){ if(cur==null) return undefined; cur = cur[parts[i]]; }
+    return cur;
+  }
+  function setPath(obj, path, val){
+    var parts = path.split(".");
+    var cur = obj;
+    for(var i=0;i<parts.length-1;i++){ cur = cur[parts[i]]; }
+    cur[parts[parts.length-1]] = val;
+  }
+
+  /* shrink uploaded photos before storing, so a handful of photos don't blow past
+     the browser's local-storage quota (a few MB per site) */
+  function resizeImage(file, maxW, quality, cb){
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      var img = new Image();
+      img.onload = function(){
+        var scale = Math.min(1, maxW / img.width);
+        var w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+        var canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        cb(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* -------------------- nav -------------------- */
+  var VIEWS = [
+    {id:"home", label:"Home"},
+    {id:"about", label:"About"},
+    {id:"events", label:"Events"},
+    {id:"culture", label:"Explore China"},
+    {id:"gallery", label:"Gallery"},
+    {id:"join", label:"Join Us"}
+  ];
+  function renderNav(){
+    var host = document.getElementById("navtabs");
+    host.innerHTML = VIEWS.map(function(v){
+      return '<button data-nav="'+v.id+'">'+v.label+'</button>';
+    }).join("");
+  }
+  function goto(view){
+    document.querySelectorAll(".view").forEach(function(s){ s.classList.toggle("active", s.dataset.view===view); });
+    document.querySelectorAll("#navtabs button").forEach(function(b){ b.classList.toggle("active", b.dataset.nav===view); });
+    document.getElementById("navtabs").classList.remove("mobile-open");
+    window.scrollTo({top:0, behavior:"instant" in window ? "instant":"auto"});
+  }
+
+  /* -------------------- renderers -------------------- */
+  function eventCard(ev, i, listName){
+    return '<div class="card event-card">' +
+      '<button class="del-btn edit-only" data-action="remove-'+listName+'" data-index="'+i+'">×</button>' +
+      '<div class="emoji" data-path="'+listName+'.'+i+'.emoji">'+esc(ev.emoji)+'</div>' +
+      '<h3 data-path="'+listName+'.'+i+'.title">'+esc(ev.title)+'</h3>' +
+      '<div class="event-meta">' +
+        '<span data-path="'+listName+'.'+i+'.date">'+esc(ev.date)+'</span>' +
+        '<span data-path="'+listName+'.'+i+'.time">'+esc(ev.time)+'</span>' +
+        '<span data-path="'+listName+'.'+i+'.location">'+esc(ev.location)+'</span>' +
+      '</div>' +
+      '<p class="event-blurb" data-path="'+listName+'.'+i+'.blurb">'+esc(ev.blurb)+'</p>' +
+    '</div>';
+  }
+
+  function galleryTileHTML(g, i, editable){
+    var hasImg = !!g.img;
+    var styleAttr = hasImg ? ' style="background-image:url(\''+g.img+'\');background-size:cover;background-position:center;"' : '';
+    var toneClass = hasImg ? '' : ' tone-'+g.tone;
+    var controls = editable ?
+      '<button class="del-btn edit-only" data-action="remove-gallery" data-index="'+i+'">×</button>' +
+      '<label class="upload-btn" title="上传照片">📁<input type="file" accept="image/*" data-upload="gallery" data-index="'+i+'" style="display:none;"></label>'
+      : '';
+    var capAttr = editable ? ' data-path="gallery.'+i+'.caption"' : '';
+    return '<div class="photo-tile'+toneClass+'"'+styleAttr+'>' + controls +
+      '<span class="cap"'+capAttr+'>'+esc(g.caption)+'</span>' +
+    '</div>';
+  }
+
+  function pastEventTileHTML(p, i){
+    var hasImg = !!p.img;
+    var styleAttr = hasImg ?
+      ' style="aspect-ratio:16/10;margin-bottom:10px;background-image:url(\''+p.img+'\');background-size:cover;background-position:center;"' :
+      ' style="aspect-ratio:16/10;margin-bottom:10px;"';
+    var toneClass = hasImg ? '' : ' tone-gold';
+    return '<div class="card">' +
+      '<button class="del-btn edit-only" data-action="remove-pastEvents" data-index="'+i+'">×</button>' +
+      '<div class="photo-tile'+toneClass+'"'+styleAttr+'>' +
+        '<label class="upload-btn" title="上传照片">📁<input type="file" accept="image/*" data-upload="pastEvents" data-index="'+i+'" style="display:none;"></label>' +
+        '<span class="cap" data-path="pastEvents.'+i+'.title">'+esc(p.title)+'</span>' +
+      '</div>' +
+      '<div style="font-size:.8rem;color:var(--ink-faint);" data-path="pastEvents.'+i+'.date">'+esc(p.date)+'</div>' +
+      '<p style="font-size:.88rem;color:var(--ink-soft);margin-top:4px;" data-path="pastEvents.'+i+'.recap">'+esc(p.recap)+'</p>' +
+    '</div>';
+  }
+
+  function renderHeroPhoto(){
+    var h = content.hero;
+    var block = document.getElementById("heroBlock");
+    var hasImg = !!h.img;
+    block.classList.toggle("has-photo", hasImg);
+    block.style.backgroundImage = hasImg ? "url('"+h.img+"')" : "";
+  }
+
+  function renderWelcomePhoto(){
+    var w = content.welcome;
+    var hasImg = !!w.img;
+    var styleAttr = hasImg ? ' style="background-image:url(\''+w.img+'\');background-size:cover;background-position:center;"' : '';
+    var toneClass = hasImg ? '' : ' tone-gold';
+    document.getElementById("welcomePhoto").innerHTML =
+      '<div class="photo-tile'+toneClass+'"'+styleAttr+'>' +
+        '<label class="upload-btn" title="上传照片">📁<input type="file" accept="image/*" data-upload="welcome" style="display:none;"></label>' +
+        '<span class="cap" data-path="welcome.caption">'+esc(w.caption)+'</span>' +
+      '</div>';
+  }
+
+  function renderHome(){
+    document.getElementById("homeEvents").innerHTML = content.events.slice(0,3).map(function(ev,i){ return eventCard(ev,i,"events"); }).join("");
+    document.getElementById("homeGallery").innerHTML = content.gallery.slice(0,6).map(function(g,i){ return galleryTileHTML(g,i,false); }).join("");
+    renderHeroPhoto();
+    renderWelcomePhoto();
+  }
+
+  function renderAbout(){
+    document.getElementById("officerGrid").innerHTML = content.officers.map(function(o,i){
+      var initials = (o.name||"?").trim().split(/\s+/).map(function(w){return w[0]||"";}).slice(0,2).join("").toUpperCase();
+      var hasImg = !!o.img;
+      var avatarStyle = hasImg ? ' style="background-image:url(\''+o.img+'\');background-size:cover;background-position:center;"' : '';
+      return '<div class="card officer-card">' +
+        '<button class="del-btn edit-only" data-action="remove-officers" data-index="'+i+'">×</button>' +
+        '<div class="avatar-wrap"><div class="avatar"'+avatarStyle+'>'+(hasImg?'':esc(initials))+'</div>' +
+        '<label class="upload-btn" title="上传头像">📁<input type="file" accept="image/*" data-upload="officers" data-index="'+i+'" style="display:none;"></label></div>' +
+        '<h3 data-path="officers.'+i+'.name">'+esc(o.name)+'</h3>' +
+        '<div class="role" data-path="officers.'+i+'.role">'+esc(o.role)+'</div>' +
+        '<div class="quote" data-path="officers.'+i+'.quote">“'+esc(o.quote)+'”</div>' +
+      '</div>';
+    }).join("");
+
+    document.getElementById("advisorCard").innerHTML =
+      '<h3 data-path="advisor.name">'+esc(content.advisor.name)+'</h3>' +
+      '<div style="color:var(--red);font-size:.85rem;font-weight:700;margin:4px 0 8px;" data-path="advisor.dept">'+esc(content.advisor.dept)+'</div>' +
+      '<p style="color:var(--ink-soft);font-size:.92rem;" data-path="advisor.note">'+esc(content.advisor.note)+'</p>' +
+      '<p style="margin-top:8px;font-size:.88rem;">Email: <span data-path="advisor.email">'+esc(content.advisor.email)+'</span></p>';
+
+    document.getElementById("faqList").innerHTML = content.faqs.map(function(f,i){
+      return '<div class="faq-item" data-faq="'+i+'">' +
+        '<button class="del-btn edit-only" data-action="remove-faqs" data-index="'+i+'">×</button>' +
+        '<button class="faq-q" data-action="toggle-faq" data-index="'+i+'"><span data-path="faqs.'+i+'.q">'+esc(f.q)+'</span><span class="caret">⌄</span></button>' +
+        '<div class="faq-a" data-path="faqs.'+i+'.a">'+esc(f.a)+'</div>' +
+      '</div>';
+    }).join("");
+  }
+
+  function renderEvents(){
+    var m = content.meeting;
+    document.getElementById("meetingStrip").innerHTML =
+      '<div class="m"><div class="k">Meets</div><div class="v" data-path="meeting.time">'+esc(m.time)+'</div></div>' +
+      '<div class="m"><div class="k">When</div><div class="v" data-path="meeting.period">'+esc(m.period)+'</div></div>' +
+      '<div class="m"><div class="k">Where</div><div class="v" data-path="meeting.room">'+esc(m.room)+'</div></div>' +
+      '<div class="m"><div class="k">Advisor</div><div class="v" data-path="meeting.advisor">'+esc(m.advisor)+'</div></div>';
+
+    document.getElementById("eventsGrid").innerHTML = content.events.map(function(ev,i){ return eventCard(ev,i,"events"); }).join("");
+
+    document.getElementById("pastGrid").innerHTML = content.pastEvents.map(function(p,i){ return pastEventTileHTML(p,i); }).join("");
+  }
+
+  function renderCulture(){
+    document.getElementById("festivalGrid").innerHTML = content.culture.festivals.map(function(f,i){
+      return '<div class="card">' +
+        '<button class="del-btn edit-only" data-action="remove-festivals" data-index="'+i+'">×</button>' +
+        '<div class="emoji" data-path="culture.festivals.'+i+'.emoji">'+esc(f.emoji)+'</div>' +
+        '<h3 data-path="culture.festivals.'+i+'.name">'+esc(f.name)+'</h3>' +
+        '<p class="event-blurb" data-path="culture.festivals.'+i+'.note">'+esc(f.note)+'</p>' +
+      '</div>';
+    }).join("");
+
+    document.getElementById("foodGrid").innerHTML = content.culture.food.map(function(f,i){
+      var dots = [0,1,2,3].map(function(n){ return '<i class="'+(n<f.spice?"on":"")+'"></i>'; }).join("");
+      return '<div class="card">' +
+        '<button class="del-btn edit-only" data-action="remove-food" data-index="'+i+'">×</button>' +
+        '<div class="emoji" data-path="culture.food.'+i+'.emoji">'+esc(f.emoji)+'</div>' +
+        '<h3 data-path="culture.food.'+i+'.name">'+esc(f.name)+'</h3>' +
+        '<div class="spice" title="辣度">'+dots+'</div>' +
+        '<p class="event-blurb" style="margin-top:6px;" data-path="culture.food.'+i+'.note">'+esc(f.note)+'</p>' +
+      '</div>';
+    }).join("");
+
+    document.getElementById("factGrid").innerHTML = content.culture.funFacts.map(function(f,i){
+      return '<div class="card">' +
+        '<button class="del-btn edit-only" data-action="remove-funFacts" data-index="'+i+'">×</button>' +
+        '<h3 style="font-size:.98rem;" data-path="culture.funFacts.'+i+'.q">'+esc(f.q)+'</h3>' +
+        '<p class="event-blurb" style="margin-top:6px;" data-path="culture.funFacts.'+i+'.a">'+esc(f.a)+'</p>' +
+      '</div>';
+    }).join("");
+  }
+
+  function renderGallery(){
+    document.getElementById("galleryGrid").innerHTML = content.gallery.map(function(g,i){ return galleryTileHTML(g,i,true); }).join("");
+  }
+
+  function renderJoin(){
+    var why = ["Meet new friends across every grade","Learn Chinese language & culture, zero experience needed","Celebrate festivals — food included","Build real leadership experience","Add something genuine to your college app"];
+    document.getElementById("whyJoinList").innerHTML = why.map(function(w){ return '<li>✓ '+esc(w)+'</li>'; }).join("");
+
+    var m = content.meeting;
+    document.getElementById("meetingCard").innerHTML =
+      '<h3 style="margin-bottom:10px;">Meeting Info</h3>' +
+      '<div class="meeting-strip" style="background:none;padding:0;gap:var(--sp-3);">' +
+      '<div class="m"><div class="k">Time</div><div class="v" data-path="meeting.time">'+esc(m.time)+'</div></div>' +
+      '<div class="m"><div class="k">Period</div><div class="v" data-path="meeting.period">'+esc(m.period)+'</div></div>' +
+      '<div class="m"><div class="k">Room</div><div class="v" data-path="meeting.room">'+esc(m.room)+'</div></div>' +
+      '<div class="m"><div class="k">President</div><div class="v" data-path="meeting.president">'+esc(m.president)+'</div></div>' +
+      '</div>';
+
+    document.getElementById("joinFormWrap").innerHTML =
+      '<form id="joinForm">' +
+        '<div class="form-grid">' +
+          '<div class="field"><label>First & Last Name</label><input required></div>' +
+          '<div class="field"><label>Grade</label><select required><option value="">Select</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>' +
+          '<div class="field full"><label>School Email</label><input type="email" required></div>' +
+          '<div class="field full"><label>Why do you want to join?</label><textarea rows="3"></textarea></div>' +
+          '<div class="field full"><label>Interests</label><div class="checks">' +
+            ["Food","Language","Festivals","Travel","Art","Volunteering"].map(function(x){ return '<label><input type="checkbox">'+x+'</label>'; }).join("") +
+          '</div></div>' +
+        '</div>' +
+        '<button class="btn btn-primary" style="margin-top:var(--sp-3);" type="submit">Submit</button>' +
+      '</form>';
+  }
+
+  function renderAll(){
+    document.getElementById("editToggle").classList.toggle("on", document.body.classList.contains("editing"));
+    renderHome(); renderAbout(); renderEvents(); renderCulture(); renderGallery(); renderJoin();
+    applyEditableAttrs();
+  }
+
+  function applyEditableAttrs(){
+    var editing = document.body.classList.contains("editing");
+    document.querySelectorAll("[data-path]").forEach(function(node){
+      if(editing) node.setAttribute("contenteditable","true");
+      else node.removeAttribute("contenteditable");
+    });
+  }
+
+  /* -------------------- list add/remove -------------------- */
+  var LIST_DEFAULTS = {
+    officers: function(){ return {name:"New Officer", role:"Role", quote:"Say something about your role.", img:null}; },
+    faqs: function(){ return {q:"New question?", a:"New answer."}; },
+    events: function(){ return {emoji:"✨", title:"New Event", date:"TBD", time:"TBD", location:"TBD", blurb:"Describe the event."}; },
+    pastEvents: function(){ return {title:"New Past Event", date:"TBD", recap:"How did it go?", img:null}; },
+    festivals: function(){ return {emoji:"🎊", name:"New Festival", note:"Describe this festival."}; },
+    food: function(){ return {emoji:"🍽️", name:"New Dish", spice:0, note:"Describe this dish."}; },
+    funFacts: function(){ return {q:"New question?", a:"New answer."}; },
+    gallery: function(){ return {caption:"New Photo", tone:["red","gold","blue"][Math.floor(Math.random()*3)], img:null}; }
+  };
+  var LIST_PATH = {
+    officers:"officers", faqs:"faqs", events:"events", pastEvents:"pastEvents",
+    festivals:"culture.festivals", food:"culture.food", funFacts:"culture.funFacts", gallery:"gallery"
+  };
+  function listArray(key){ return getPath(content, LIST_PATH[key]); }
+
+  function addItem(key){
+    listArray(key).push(LIST_DEFAULTS[key]());
+    saveContent(); renderAll();
+  }
+  function removeItem(key, idx){
+    listArray(key).splice(idx,1);
+    saveContent(); renderAll();
+  }
+
+  /* -------------------- events -------------------- */
+  document.addEventListener("click", function(e){
+    var navBtn = e.target.closest("[data-nav]");
+    if(navBtn){ e.preventDefault(); goto(navBtn.dataset.nav); return; }
+
+    if(e.target.id === "hamburger"){ document.getElementById("navtabs").classList.toggle("mobile-open"); return; }
+    if(e.target.id === "helpBtn"){ document.getElementById("helpModal").classList.add("open"); return; }
+    if(e.target.id === "closeHelp"){ document.getElementById("helpModal").classList.remove("open"); return; }
+
+    if(e.target.id === "editToggle"){
+      document.body.classList.toggle("editing");
+      renderAll();
+      return;
+    }
+    if(e.target.id === "saveBtn"){ saveContent(); return; }
+    if(e.target.id === "resetBtn"){
+      if(confirm("确定要清空本地草稿，恢复成正式发布的内容吗？")){
+        localStorage.removeItem(STORAGE_KEY);
+        content = clone(PUBLISHED_CONTENT || DEFAULT_CONTENT);
+        renderAll();
+      }
+      return;
+    }
+    if(e.target.id === "exportBtn"){
+      document.getElementById("ioTitle").textContent = "导出内容（复制保存好）";
+      document.getElementById("ioText").value = JSON.stringify(content, null, 2);
+      document.getElementById("ioApply").style.display = "none";
+      document.getElementById("ioModal").classList.add("open");
+      return;
+    }
+    if(e.target.id === "importBtn"){
+      document.getElementById("ioTitle").textContent = "导入内容（粘贴 JSON 后点应用）";
+      document.getElementById("ioText").value = "";
+      document.getElementById("ioApply").style.display = "";
+      document.getElementById("ioModal").classList.add("open");
+      return;
+    }
+    if(e.target.id === "ioCancel"){ document.getElementById("ioModal").classList.remove("open"); return; }
+    if(e.target.id === "ioApply"){
+      try{
+        var parsed = JSON.parse(document.getElementById("ioText").value);
+        content = parsed;
+        saveContent(); renderAll();
+        document.getElementById("ioModal").classList.remove("open");
+      }catch(err){ alert("JSON 格式有问题，检查一下再试试。"); }
+      return;
+    }
+    if(e.target === document.getElementById("helpModal")){ document.getElementById("helpModal").classList.remove("open"); return; }
+    if(e.target === document.getElementById("ioModal")){ document.getElementById("ioModal").classList.remove("open"); return; }
+
+    var addBtn = e.target.closest("[data-action^='add-']");
+    if(addBtn){ addItem(addBtn.dataset.action.replace("add-","")); return; }
+
+    var delBtn = e.target.closest("[data-action^='remove-']");
+    if(delBtn){ removeItem(delBtn.dataset.action.replace("remove-",""), parseInt(delBtn.dataset.index,10)); return; }
+
+    var faqBtn = e.target.closest("[data-action='toggle-faq']");
+    if(faqBtn){
+      var item = faqBtn.closest(".faq-item");
+      item.classList.toggle("open");
+      return;
+    }
+  });
+
+  document.addEventListener("blur", function(e){
+    var t = e.target;
+    if(!t.getAttribute) return;
+    var path = t.getAttribute("data-path");
+    if(path && document.body.classList.contains("editing")){
+      setPath(content, path, t.textContent.trim());
+      saveContent();
+    }
+  }, true);
+
+  var SINGLE_IMG_PATH = { hero:"hero.img", welcome:"welcome.img" };
+  document.addEventListener("change", function(e){
+    var inp = e.target.closest("input[type=file][data-upload]");
+    if(!inp || !inp.files || !inp.files[0]) return;
+    var key = inp.dataset.upload;
+    var idx = inp.dataset.index;
+    resizeImage(inp.files[0], 1000, 0.82, function(dataUrl){
+      if(SINGLE_IMG_PATH[key]){
+        setPath(content, SINGLE_IMG_PATH[key], dataUrl);
+      } else {
+        var arr = getPath(content, LIST_PATH[key]);
+        arr[parseInt(idx,10)].img = dataUrl;
+      }
+      saveContent();
+      renderAll();
+    });
+  });
+
+  document.addEventListener("submit", function(e){
+    if(e.target.id === "joinForm"){
+      e.preventDefault();
+      document.getElementById("joinFormWrap").innerHTML =
+        '<div class="success-panel"><div class="big">🎉</div><h3 style="margin:8px 0 4px;">Thank you for joining!</h3><p style="color:var(--ink-soft);">We can\'t wait to meet you — keep an eye on your email.</p></div>';
+    }
+  });
+
+  /* -------------------- init --------------------
+     真正发布的内容存在同目录下的 content.json 里（Decap CMS 的 /admin 后台改的就是这个文件）。
+     页面加载时先尝试读取它；读不到（比如没有配置好 CMS，或者用 file:// 直接双击打开文件）就用
+     上面 DEFAULT_CONTENT 兜底。本地草稿（编辑模式存的 localStorage）优先级最高，方便在正式
+     发布前先在自己浏览器里预览效果。 */
+  function boot(){
+    renderNav();
+    fetch("content.json", {cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(remote){ PUBLISHED_CONTENT = remote; afterLoad(); })
+      .catch(function(){ PUBLISHED_CONTENT = clone(DEFAULT_CONTENT); afterLoad(); });
+  }
+  function afterLoad(){
+    var draft = loadLocalDraft();
+    content = draft || clone(PUBLISHED_CONTENT);
+    renderAll();
+    goto("home");
+    if(!localStorage.getItem("ccc_seen_help")){
+      document.getElementById("helpModal").classList.add("open");
+      localStorage.setItem("ccc_seen_help","1");
+    }
+  }
+  boot();
+})();
+</script>
+</body>
+</html>
