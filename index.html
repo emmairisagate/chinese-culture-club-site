@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chinese Culture Club</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
   :root{
     --red:#C62828;
@@ -933,7 +933,20 @@
   function renderAll(){
     document.getElementById("editToggle").classList.toggle("on", document.body.classList.contains("editing"));
     renderHome(); renderAbout(); renderEvents(); renderCulture(); renderGallery(); renderJoin();
+    syncStaticFields();
     applyEditableAttrs();
+  }
+
+  /* elements whose data-path text is written directly in the HTML skeleton (nav brand,
+     hero title/subtitle, welcome text, mission, contact info) are never touched by the
+     render*() functions above, since those only fill in the dynamic list containers.
+     this pushes the loaded content into those static spots too. */
+  function syncStaticFields(){
+    document.querySelectorAll("[data-path]").forEach(function(node){
+      if(document.activeElement === node) return; // don't clobber what the user is mid-typing
+      var val = getPath(content, node.getAttribute("data-path"));
+      if(val != null) node.textContent = val;
+    });
   }
 
   function applyEditableAttrs(){
