@@ -9,5 +9,84 @@
   <!-- 这个页面只能在真实部署到 Netlify 后打开，不能在 Claude 的预览里打开
        （预览环境会挡掉外部脚本，这是故意的安全限制，不是 bug）。 -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+    /* 右侧实时预览面板：纯浏览器渲染，不用发布就能看到改动后网站大致长什么样。
+       h / createClass 是 decap-cms.js 加载后挂在全局上的，不需要额外打包工具。 */
+    var S = {
+      wrap: { fontFamily: '"PingFang SC","Noto Sans SC","Segoe UI",-apple-system,sans-serif', color: '#2A2521', lineHeight: 1.55, padding: '4px' },
+      hero: { background: 'linear-gradient(135deg,#9E1F1F,#C62828)', color: '#fff', padding: '28px 22px', borderRadius: '12px', marginBottom: '26px' },
+      eyebrow: { fontSize: '12px', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#F5E6C6', marginBottom: '8px' },
+      h1: { fontSize: '26px', fontWeight: 800, margin: '0 0 10px' },
+      tag: { fontSize: '14px', opacity: .92, margin: '4px 0' },
+      section: { marginBottom: '26px' },
+      sectionTitle: { fontSize: '16px', fontWeight: 800, marginBottom: '10px', borderBottom: '2px solid #C62828', paddingBottom: '4px', display: 'inline-block' },
+      card: { background: '#fff', border: '1px solid rgba(42,37,33,.12)', borderRadius: '10px', padding: '12px', marginBottom: '10px', boxShadow: '0 2px 8px rgba(42,37,33,.06)' },
+      grid: { display: 'flex', flexWrap: 'wrap', gap: '10px' },
+      chip: { background: '#F3EEE6', borderRadius: '8px', padding: '6px 10px', fontSize: '13px', fontWeight: 600 },
+      meetingStrip: { display: 'flex', gap: '20px', flexWrap: 'wrap', background: '#F3EEE6', borderRadius: '10px', padding: '14px 18px', marginBottom: '26px' },
+      meetK: { fontSize: '11px', textTransform: 'uppercase', letterSpacing: '.05em', color: '#9C9184', fontWeight: 700 },
+      meetV: { fontWeight: 700, marginTop: '2px' }
+    };
+
+    var SitePreview = createClass({
+      render: function () {
+        var data = (this.props.entry.getIn(['data']) || {}).toJS ? this.props.entry.getIn(['data']).toJS() : {};
+        var site = data.site || {}, hero = data.hero || {}, welcome = data.welcome || {};
+        var meeting = data.meeting || {}, officers = data.officers || [];
+        var events = data.events || [], gallery = data.gallery || [];
+
+        return h('div', { style: S.wrap },
+          h('div', { style: S.hero },
+            h('div', { style: S.eyebrow }, site.school || ''),
+            h('div', { style: S.h1 }, hero.title || ''),
+            h('div', { style: S.tag }, hero.subtitle || ''),
+            h('div', { style: Object.assign({}, S.tag, { opacity: .85, fontSize: '13px' }) }, hero.desc || '')
+          ),
+          h('div', { style: S.section },
+            h('div', { style: S.sectionTitle }, 'Welcome'),
+            h('p', {}, welcome.text || '')
+          ),
+          h('div', { style: S.meetingStrip },
+            ['time', 'period', 'room', 'advisor', 'president'].map(function (k) {
+              var labels = { time: 'MEETS', period: 'WHEN', room: 'WHERE', advisor: 'ADVISOR', president: 'PRESIDENT' };
+              return h('div', { key: k },
+                h('div', { style: S.meetK }, labels[k]),
+                h('div', { style: S.meetV }, meeting[k] || '')
+              );
+            })
+          ),
+          h('div', { style: S.section },
+            h('div', { style: S.sectionTitle }, 'Officers'),
+            officers.map(function (o, i) {
+              return h('div', { key: i, style: S.card },
+                h('div', { style: { fontWeight: 800 } }, o.name || ''),
+                h('div', { style: { color: '#C62828', fontSize: '13px', fontWeight: 700, margin: '2px 0 6px' } }, o.role || ''),
+                h('div', { style: { fontSize: '13px', color: '#6B6259', fontStyle: 'italic' } }, o.quote ? '"' + o.quote + '"' : '')
+              );
+            })
+          ),
+          h('div', { style: S.section },
+            h('div', { style: S.sectionTitle }, 'Upcoming Events'),
+            events.map(function (ev, i) {
+              return h('div', { key: i, style: S.card },
+                h('div', { style: { fontWeight: 800 } }, (ev.emoji || '') + ' ' + (ev.title || '')),
+                h('div', { style: { fontSize: '12px', color: '#6B6259', margin: '4px 0' } }, [ev.date, ev.time, ev.location].filter(Boolean).join(' · ')),
+                h('div', { style: { fontSize: '13px', color: '#6B6259' } }, ev.blurb || '')
+              );
+            })
+          ),
+          h('div', { style: S.section },
+            h('div', { style: S.sectionTitle }, 'Gallery captions'),
+            h('div', { style: S.grid },
+              gallery.map(function (g, i) { return h('span', { key: i, style: S.chip }, g.caption || ''); })
+            )
+          )
+        );
+      }
+    });
+
+    CMS.registerPreviewTemplate('content', SitePreview);
+  </script>
 </body>
 </html>
